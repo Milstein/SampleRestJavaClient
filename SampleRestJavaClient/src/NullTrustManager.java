@@ -26,8 +26,10 @@ public class NullTrustManager implements X509TrustManager, Cloneable {
 	/**
 	 * Method getAcceptedIssuers.
 	 * 
-	 * @return java.security.cert.X509Certificate[]
-	 * @see javax.net.ssl.X509TrustManager#getAcceptedIssuers()
+	 * 
+	 * 
+	 * @return java.security.cert.X509Certificate[] * @see
+	 *         javax.net.ssl.X509TrustManager#getAcceptedIssuers()
 	 */
 	public java.security.cert.X509Certificate[] getAcceptedIssuers() {
 		return null;
@@ -40,6 +42,7 @@ public class NullTrustManager implements X509TrustManager, Cloneable {
 	 *            java.security.cert.X509Certificate[]
 	 * @param authType
 	 *            String
+	 * 
 	 * @see javax.net.ssl.X509TrustManager#checkClientTrusted(java.security.cert.X509Certificate[],
 	 *      String)
 	 **/
@@ -56,6 +59,7 @@ public class NullTrustManager implements X509TrustManager, Cloneable {
 	 *            java.security.cert.X509Certificate[]
 	 * @param authType
 	 *            String
+	 * 
 	 * @see javax.net.ssl.X509TrustManager#checkServerTrusted(java.security.cert.X509Certificate[],
 	 *      String)
 	 **/
@@ -78,15 +82,24 @@ public class NullTrustManager implements X509TrustManager, Cloneable {
 		}
 	}
 
+	/**
+	 * Method toString.
+	 * 
+	 * @return String
+	 */
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return super.toString();
 	}
 
+	/**
+	 * Method clone.
+	 * 
+	 * @return Object
+	 * @throws CloneNotSupportedException
+	 */
 	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
+	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
 	}
 }

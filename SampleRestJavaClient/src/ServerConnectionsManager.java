@@ -20,14 +20,33 @@ import org.apache.cxf.transport.http.HTTPConduit;
 import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 
+import com.nutanix.prism.services.appliance.configuration.ContainerAdministration;
 import com.nutanix.prism.services.appliance.configuration.DiskAdministration;
 import com.nutanix.prism.services.appliance.configuration.HostAdministration;
+import com.nutanix.prism.services.appliance.configuration.ManagementServerAdministration;
+import com.nutanix.prism.services.dr.BackupAndDrAdministration;
+import com.nutanix.prism.services.vmmanagement.VMAdministration;
 
 /**
  * @author andreleibovici
  * @version $Revision: 1.0 $
  */
 public final class ServerConnectionsManager implements Cloneable {
+
+	/**
+	 * Field USERNAME
+	 */
+	private String username = null;
+
+	/**
+	 * Field PASSWORD
+	 */
+	private String password = null;
+
+	/**
+	 * Field SERVER
+	 */
+	private String serverhost = null;
 
 	/**
 	 * Field REST_BASE_PATH. (value is
@@ -64,7 +83,7 @@ public final class ServerConnectionsManager implements Cloneable {
 	 * Method getInstance.
 	 * 
 	 * @return ServerConnectionsManager
-	 */
+	 **/
 	public static synchronized ServerConnectionsManager getInstance() {
 		if (null == ServerConnectionsManager) {
 			ServerConnectionsManager = new ServerConnectionsManager();
@@ -83,6 +102,7 @@ public final class ServerConnectionsManager implements Cloneable {
 	 *            String
 	 * @param classType
 	 *            Class<T>
+	 * 
 	 * @return T
 	 */
 	private <T> T getRestService(final String server, final String username,
@@ -110,39 +130,61 @@ public final class ServerConnectionsManager implements Cloneable {
 	}
 
 	/**
-	 * Method getDiskAdminRef.
+	 * Method getDiskAdminRef
 	 * 
-	 * @param serverHostPort
-	 *            String
-	 * @param username
-	 *            String
-	 * @param password
-	 *            String
 	 * @return DiskAdministration
-	 * @throws Exception
 	 */
-	public DiskAdministration getDiskAdminRef(final String serverHostPort,
-			final String username, final String password) {
-		return getRestService(serverHostPort, username, password,
+	public DiskAdministration getDiskAdminRef() {
+		return getRestService(serverhost, username, password,
 				DiskAdministration.class);
 	}
 
 	/**
 	 * Method getHostAdminRef.
 	 * 
-	 * @param serverHostPort
-	 *            String
-	 * @param username
-	 *            String
-	 * @param password
-	 *            String
 	 * @return HostAdministration
-	 * @throws Exception
 	 */
-	public HostAdministration getHostAdminRef(final String serverHostPort,
-			final String username, final String password) {
-		return getRestService(serverHostPort, username, password,
+	public HostAdministration getHostAdminRef() {
+		return getRestService(serverhost, username, password,
 				HostAdministration.class);
+	}
+
+	/**
+	 * Method getContainerAdminRef
+	 * 
+	 * @return ContainerAdministration
+	 */
+	public ContainerAdministration getContainerAdminRef() {
+		return getRestService(serverhost, username, password,
+				ContainerAdministration.class);
+	}
+
+	/**
+	 * Method getManagementServerAdminRef
+	 * 
+	 * @return ManagementServerAdministration
+	 */
+	public ManagementServerAdministration getManagementServerAdminRef() {
+		return getRestService(serverhost, username, password,
+				ManagementServerAdministration.class);
+	}
+
+	/**
+	 * 
+	 * @return VMAdministration
+	 */
+	public VMAdministration getVMAdministration() {
+		return getRestService(serverhost, username, password,
+				VMAdministration.class);
+	}
+
+	/**
+	 * 
+	 * @return BackupAndDrAdministration
+	 */
+	public BackupAndDrAdministration getBackupAndDrAdministration() {
+		return getRestService(serverhost, username, password,
+				BackupAndDrAdministration.class);
 	}
 
 	/**
@@ -167,15 +209,83 @@ public final class ServerConnectionsManager implements Cloneable {
 		conduit.setClient(httpClientPolicy);
 	}
 
+	/**
+	 * Method toString.
+	 * 
+	 * @return String
+	 */
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
 		return super.toString();
 	}
 
+	/**
+	 * Method clone.
+	 * 
+	 * @return Object
+	 * @throws CloneNotSupportedException
+	 */
 	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
+	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
 	}
+
+	/**
+	 * Method getUSERNAME.
+	 * 
+	 * @return String
+	 */
+	public String getUSERNAME() {
+		return username;
+	}
+
+	/**
+	 * Method setUSERNAME.
+	 * 
+	 * @param uSERNAME
+	 *            String
+	 */
+	public void setUSERNAME(String uSERNAME) {
+		username = uSERNAME;
+	}
+
+	/**
+	 * Method getPASSWORD.
+	 * 
+	 * @return String
+	 */
+	public String getPASSWORD() {
+		return password;
+	}
+
+	/**
+	 * Method setPASSWORD.
+	 * 
+	 * @param pASSWORD
+	 *            String
+	 */
+	public void setPASSWORD(String pASSWORD) {
+		password = pASSWORD;
+	}
+
+	/**
+	 * Method getSERVER.
+	 * 
+	 * @return String
+	 */
+	public String getSERVER() {
+		return serverhost;
+	}
+
+	/**
+	 * Method setSERVER.
+	 * 
+	 * @param sERVER
+	 *            String
+	 */
+	public void setSERVER(String sERVER) {
+		serverhost = sERVER;
+	}
+
 }
